@@ -18,7 +18,7 @@ public class ResultFormat {
     private String serverError = "服务器内部错误";
 
     /**
-     * 请求参数为null
+     * 客户端错误 参数错误
      *
      * @param o
      * @return
@@ -31,12 +31,24 @@ public class ResultFormat {
         return map;
     }
 
+    /**
+     * 客户端错误 参数错误 自带msg
+     * @param o
+     * @param msg
+     * @return
+     */
+
     public Map<String, Object> setFormatByNull(Object o, String msg) {
         Map<String, Object> map = setFormatByNull(o);
         map.put("msg", msg);
         return map;
     }
 
+    /**
+     * 请求成功 自带msg
+     * @param o
+     * @return
+     */
     public Map<String, Object> setFormatBySucceed(Object o) {
         Map<String, Object> map = new HashMap<>();
         map.put("code", 200);
@@ -45,12 +57,24 @@ public class ResultFormat {
         return map;
     }
 
+    /**
+     * 请求成功
+     * @param o
+     * @param msg
+     * @return
+     */
+
     public Map<String, Object> setFormatBySucceed(Object o, String msg) {
         Map<String, Object> map = setFormatBySucceed(o);
         map.put("msg", msg);
         return map;
     }
 
+    /**
+     * 服务器异常 自带msg
+     * @param o
+     * @return
+     */
     public Map<String, Object> setFormatByFailed(Object o) {
         Map<String, Object> map = new HashMap<>();
         map.put("code", 500);
@@ -59,6 +83,12 @@ public class ResultFormat {
         return map;
     }
 
+    /**
+     * 服务器异常
+     * @param o
+     * @param msg
+     * @return
+     */
     public Map<String, Object> setFormatByFailed(Object o, String msg) {
         Map<String, Object> map = setFormatByFailed(o);
         map.put("msg", msg);

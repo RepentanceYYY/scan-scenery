@@ -1,5 +1,6 @@
 package com.scene.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,8 +14,10 @@ public class UserInfo {
     private Date createTime;
     private Date updateTime;
     private boolean notarizeDelete;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date deleteTime;
-    public UserInfo(){
+
+    public UserInfo() {
 
     }
 

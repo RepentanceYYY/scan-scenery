@@ -8,7 +8,7 @@ import com.scene.utils.EncryptionTools;
 import com.scene.utils.IdFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Component
 public class UserInfoService implements IUserInfoService {
@@ -31,5 +31,25 @@ public class UserInfoService implements IUserInfoService {
         userInfo.setUserPassword(endPwd);
         Integer insertResult = userInfoMapper.insertUserInfo(userInfo);
         return insertResult > 0 ? userInfo : null;
+    }
+
+    @Override
+    public UserInfo selectUser(UserInfo userInfo) {
+        String endPwd = encryptionTools.mD5ToString(userInfo.getUserPassword());
+        userInfo.setUserPassword(endPwd);
+        UserInfo curUserInfo = userInfoMapper.selectUserInfoByEmail(userInfo);
+        if (curUserInfo != null && !StringUtils.isEmpty(curUserInfo.getId())) {
+            curUserInfo.setUserPassword(null);
+        }
+        return curUserInfo;
+    }
+
+    @Override
+    public Boolean existsUserByEmail(String userEmail) {
+        int IsExists = userInfoMapper.existsUserInfoByEmail(userEmail);
+        if (IsExists > 0) {
+            return true;
+        }
+        return false;
     }
 }
