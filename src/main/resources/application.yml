@@ -1,0 +1,24 @@
+spring:
+  profiles:
+    #使用test配置
+    active: test
+server:
+  servlet:
+    context-path: /
+  port: 8080
+#多线程设置
+async:
+  executor:
+    thread:
+      # 配置核心线程数
+      core_pool_size: 10
+      # 配置最大线程数
+      max_pool_size: 20
+      # 配置队列大小
+      queue_capacity: 999
+      name:
+        #多线程名称
+        prefix:
+#制定日志配置文件
+logging:
+  config: classpath:log4j.properties
